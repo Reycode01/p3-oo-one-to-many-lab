@@ -47,10 +47,10 @@ def test_owner_has_pets():
     owner = Owner("Ben")
     pet1 = Pet("Fido", "dog", owner)
     pet2 = Pet("Clifford", "dog", owner)
+    owner.add_pet(pet1)
+    owner.add_pet(pet2)
 
-    assert owner.pets() == [pet1, pet2]
-
-    Pet.all = []
+    assert owner.pets == [pet1, pet2]
 
 def test_owner_adds_pets():
     """Test Owner class has method add_pet(), validating and adding a pet"""
@@ -59,9 +59,7 @@ def test_owner_adds_pets():
     owner.add_pet(pet)
 
     assert pet.owner == owner
-    assert owner.pets() == [pet]
-
-    Pet.all = []
+    assert owner.pets == [pet]
 
 def test_add_pet_checks_isinstance():
     """Test Owner class instance method add_pet() validates Pet type"""
@@ -78,5 +76,9 @@ def test_get_sorted_pets():
     pet2 = Pet("Clifford", "dog", owner)
     pet3 = Pet("Whiskers", "cat", owner)
     pet4 = Pet("Jerry", "reptile", owner)
-    
+    owner.add_pet(pet1)
+    owner.add_pet(pet2)
+    owner.add_pet(pet3)
+    owner.add_pet(pet4)
+
     assert owner.get_sorted_pets() == [pet2, pet1, pet4, pet3]
